@@ -404,20 +404,18 @@ function RecentWriting() {
     <section className="recent-writing" aria-labelledby="recent-writing-title">
       <div className="recent-writing-inner">
         <div className="recent-writing-heading">
-          <span className="testimonials-badge">FROM THE NOTEBOOK</span>
           <h2 id="recent-writing-title">Recent articles &amp; writings</h2>
-          <p>Ideas and notes on thoughtful product design.</p>
         </div>
         <a
           className="article-card"
           href="https://www.skediodesign.in/blog/what-is-a-design-system-why-startups-need-one"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener"
         >
           <span className="article-card-top"><span>DESIGN SYSTEMS</span><span>SKEDIO DESIGN</span></span>
           <span className="article-card-title">What Is a Design System? Why Startups Need One</span>
+          <span className="article-card-byline">Written for Skedio Design.</span>
           <span className="article-card-bottom">
-            <span>A recent piece on design systems and startup product design.</span>
             <span className="article-card-arrow" aria-hidden="true">
               <svg viewBox="0 0 24 24" focusable="false"><path d="M7 17 17 7M8 7h9v9" /></svg>
             </span>
