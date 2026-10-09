@@ -65,12 +65,12 @@ function Footer() {
     <p>{socialsData.map((social, i) => (
       <span key={social.name}><a href={social.url} target="_blank" rel="noreferrer">{social.name}</a>{i < socialsData.length - 1 ? ' · ' : ''}</span>
     ))}</p>
-    <i>Designed softly, always.</i><span>© 2026 Harshita</span>
+    <span>© 2026 Harshita</span>
   </footer>
 }
 
-function Texture({ children, className = '' }: { children: React.ReactNode, className?: string }) {
-  return <section className={`texture ${className}`} style={{ backgroundImage: `linear-gradient(rgba(248,245,242,.72), rgba(248,245,242,.72)), url(${assets.gingham})` }}>{children}</section>
+function Texture({ children, className = '', 'aria-labelledby': labelledBy }: { children: React.ReactNode, className?: string, 'aria-labelledby'?: string }) {
+  return <section className={`texture ${className}`} aria-labelledby={labelledBy} style={{ backgroundImage: `linear-gradient(rgba(248,245,242,.72), rgba(248,245,242,.72)), url(${assets.gingham})` }}>{children}</section>
 }
 
 interface StackProject {
@@ -292,13 +292,12 @@ function ProjectStack() {
   }, [])
 
   return (
-    <section id="selected-work" className="project-stack" ref={stackRef}>
+    <section id="selected-work" className="project-stack" aria-labelledby="selected-work-title" ref={stackRef}>
       <div className="stack-bg" aria-hidden="true" />
       <div className="stack-fade" aria-hidden="true" />
       <div className="stack-header">
         <div className="stack-heading-text">
-          <h2>SELECTED WORK</h2>
-          <span>Scroll down to explore each project</span>
+          <h2 id="selected-work-title">SELECTED WORK</h2>
         </div>
         <div className="stack-nav" role="group" aria-label="Selected work navigation">
           {stackProjects.map((proj, idx) => (
@@ -442,8 +441,7 @@ function TestimonialsSection() {
     <section className="testimonials-section" aria-labelledby="testimonials-title">
       <div className="testimonials-header">
         <span className="testimonials-badge">COLLABORATIONS &amp; WORDS</span>
-        <h2 className="testimonials-title" id="testimonials-title">Trusted by thoughtful<br />teams and collaborators.</h2>
-        <p className="testimonials-subtitle">A few kind words from the people I’ve had the joy of building with.</p>
+        <h2 className="testimonials-title" id="testimonials-title">Thoughtful teams and collaborators.</h2>
       </div>
       <div className="testimonial-grid">
         <article
@@ -513,7 +511,7 @@ function App({ initialPath }: { initialPath?: string } = {}) {
     window.scrollTo({ top: 0 })
   }, [path])
   const content = path === '/contact' ? <Contact /> : <Home />
-  return <main className="container"><Header /><section className="page-content">{content}</section><Footer /></main>
+  return <main className="container"><Header /><div className="page-content">{content}</div><Footer /></main>
 }
 
 export default App
