@@ -362,7 +362,7 @@ function ProjectStack() {
 }
 
 function Home() {
-  const homeRef = useRef<HTMLElement>(null)
+  const homeRef = useRef<HTMLDivElement>(null)
   useClientLayoutEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const context = gsap.context(() => {
@@ -381,12 +381,14 @@ function Home() {
     return () => context.revert()
   }, [])
   return <>
-    <section ref={homeRef} className="home-page">
-      <section className="home-intro"><div><h1>Harshita Upadhyay<br />Product Designer</h1><p>Designing gentle moments in a digital world. <span lang="hi">दिल से</span>.</p></div><img className="avatar" src="/avatar.webp" width="190" height="190" decoding="async" loading="eager" fetchPriority="high" alt="Illustrated portrait of Harshita Upadhyay" /></section>
+    <div ref={homeRef} className="home-page">
+      <section className="home-intro" aria-labelledby="home-title"><div><h1 id="home-title">Harshita Upadhyay<br />Product Designer</h1><p>Product &amp; UI/UX designer in India. I design calm, clear interfaces for SaaS, web and mobile products. <span lang="hi">दिल से.</span></p></div><img className="avatar" src="/avatar.webp" width="190" height="190" decoding="async" loading="eager" fetchPriority="high" alt="Illustrated portrait of Harshita Upadhyay" /></section>
       <div className="name-display" aria-hidden="true">{'Harshita'.split('').map((letter, index) => <span className="name-letter" key={`${letter}-${index}`}>{letter}</span>)}</div>
-      <Texture className="home-about"><figure><img src={assets.desk} width="982" height="949" loading="lazy" decoding="async" alt="A cosy illustrated designer workspace" /></figure><div><p>Hi, I’m <strong>Harshita Upadhyay</strong>, a product designer who loves creating gentle, thoughtful digital experiences. I care deeply about aesthetics, clarity, and the small details that make designs feel calm, human, and meaningful.</p><p>~I design with intention.</p><div className="button-row"><a href="/#selected-work" onClick={(e) => { e.preventDefault(); navigateWork() }}>See works</a>{/* TODO(owner): Link to a supplied resume PDF when one is available. */}<a href="/contact">Resume</a></div></div></Texture>
-      <section className="home-promise"><h2>I MAKE DESIGNS<br />PEOPLE REMEMBER</h2><p>I design clean websites, apps and brand systems that help ideas look sharper, feel trusted and work with purpose</p></section>
-    </section>
+      {/* TODO(owner): Add city, education, certifications, and internship details when verified. */}
+      <Texture className="home-about" aria-labelledby="about-title"><h2 className="visually-hidden" id="about-title">About Harshita</h2><figure><img src={assets.desk} width="982" height="949" loading="lazy" decoding="async" alt="A cosy illustrated designer workspace" /></figure><div><p>Hi, I’m <strong>Harshita Upadhyay</strong>, a product designer in India. I work across UX research, wireframing, UI design, prototyping and design systems in Figma. Recent work includes a cybersecurity SaaS dashboard (CyberSec Toolkit) and a physiotherapy product (Sedative Physio), and I’ve designed with teams at Skedio, Artcetra and NeuroBots Robotics Club.</p><p>~I design with intention.</p><div className="button-row"><a href="/#selected-work" onClick={(e) => { e.preventDefault(); navigateWork() }}>View selected work</a>{/* TODO(owner): Add public/resume.pdf and relink. */}<a href="/contact">Get in touch</a></div></div></Texture>
+      <section className="home-promise" aria-labelledby="promise-title"><h2 id="promise-title">I MAKE DESIGNS<br />PEOPLE REMEMBER</h2><p>I design clean websites, apps and design systems that help ideas look sharper, feel trusted and work with purpose.</p></section>
+      <section className="services-section" aria-labelledby="services-title"><div className="services-inner"><h2 id="services-title">What I design</h2><ul className="services-list">{servicesData.map((service) => <li className="service-card" key={service.name}><h3>{service.name}</h3><p>{service.description}</p></li>)}</ul><p className="availability">Open to full-time roles and freelance projects.</p></div></section>
+    </div>
     <ProjectStack />
     <RecentWriting />
     <TestimonialsSection />
@@ -484,16 +486,16 @@ function Contact() {
       setStatus('error')
     }
   }
-  return <><h1 className="contact-title">Have a project, idea, or opportunity?<br className="desktop" /> I’d love to hear from you.</h1><Texture className="contact-area"><form onSubmit={submit}>
+  return <><h1 className="contact-title" id="contact-title">Have a project, idea, or opportunity?<br className="desktop" /> I’d love to hear from you.</h1><Texture className="contact-area" aria-labelledby="contact-title"><form onSubmit={submit}>
     <input type="hidden" name="_subject" value="New message from your portfolio" />
     <input type="text" name="_honey" className="honey-pot" tabIndex={-1} autoComplete="off" aria-hidden="true" />
     <label>Name<input name="name" required placeholder="Jane Smith" disabled={status === 'sending'} /></label>
     <label>Email<input name="email" required type="email" placeholder="yourmail@gmail.com" disabled={status === 'sending'} /></label>
-    <label>Service<select name="service" defaultValue={servicesData[0]}>{servicesData.map((service) => <option key={service}>{service}</option>)}</select></label>
+    <label>Service<select name="service" defaultValue={servicesData[0].name}>{servicesData.map((service) => <option key={service.name}>{service.name}</option>)}</select></label>
     <label>Message<textarea name="message" rows={5} required placeholder="Tell me about your project…" disabled={status === 'sending'} /></label>
     <button type="submit" disabled={status === 'sending'}>{status === 'sending' ? 'Sending…' : status === 'sent' ? 'Thank you!' : status === 'error' ? 'Try again' : 'Submit'}</button>
     {status === 'sent' && <p className="form-note ok">Message sent — I’ll get back to you soon.</p>}
-    {status === 'error' && <p className="form-note err">Couldn’t send. Email me directly at harshitaupadhyay7741@gmail.com</p>}
+    {status === 'error' && <p className="form-note err">Couldn’t send. Please try again later.</p>}
   </form></Texture></>
 }
 

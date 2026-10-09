@@ -127,6 +127,18 @@ button:active { transform: translateY(0) scale(0.97); }
 .home-promise h2 { margin: 0; font-size: clamp(1.3rem, 0.65rem + 2.08vw, 3.07rem); letter-spacing: -0.09em; line-height: 1.1; font-weight: 500; }
 .home-promise p { margin: 28px auto 0; max-width: 640px; font-size: clamp(1rem, 2.1vw, 1.45rem); letter-spacing: -0.06em; line-height: 1.3; opacity: 0.8; }
 
+/* ─── Services ───────────────────────────────────────────────────────────── */
+.services-section { padding: 0 var(--home-gutter) 108px; }
+.services-inner { width: min(1160px, 100%); margin: 0 auto; }
+.services-inner > h2 { margin: 0 0 24px; text-align: center; font-size: clamp(1.3rem, 0.65rem + 2.08vw, 3.07rem); line-height: 1.1; letter-spacing: -.09em; font-weight: 500; }
+.services-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.service-card { min-height: 138px; padding: 22px; border: 1px dashed rgba(101,86,79,.42); border-radius: 18px; background: rgba(255,254,254,.5); }
+.service-card h3 { margin: 0; font-size: 1rem; line-height: 1.25; letter-spacing: -.05em; }
+.service-card p { margin: 10px 0 0; font-size: .78rem; line-height: 1.5; opacity: .78; }
+.availability { margin: 28px 0 0; text-align: center; font-size: .82rem; line-height: 1.5; }
+.stack-card-meta { margin-top: 12px !important; font-size: .72rem !important; letter-spacing: 0 !important; opacity: .8; }
+.stack-card-outcome { margin-top: 6px !important; font-size: .75rem !important; }
+
 /* ─── Recent writing ────────────────────────────────────────────────────── */
 .recent-writing { padding: 78px var(--home-gutter) 88px; background: var(--paper); }
 .recent-writing-inner { width: min(1160px, 100%); margin: 0 auto; display: grid; grid-template-columns: .8fr 1.2fr; align-items: center; gap: clamp(28px, 7vw, 100px); }
@@ -526,6 +538,7 @@ button:active { transform: translateY(0) scale(0.97); }
 .feature-kicker { position: relative; font-size: .56rem; letter-spacing: .16em; opacity: .72; }
 .feature-avatar { position: relative; width: 56px; height: 56px; margin: 4px 0 12px; border-color: rgba(248,245,242,.85); box-shadow: 0 0 0 6px rgba(235,197,197,.1); }
 .testimonial-feature blockquote { position: relative; margin: 0; max-width: 490px; font-size: clamp(.9rem, 1.25vw, 1.08rem); line-height: 1.45; font-weight: 700; animation: quote-arrive .3s ease both; }
+.feature-quote { display: flex; flex-direction: column; align-items: center; margin: 0; }
 .feature-person { display: grid; gap: 4px; margin-top: 9px; }
 .feature-person strong { font-size: .77rem; }
 .feature-person span { font-size: .64rem; opacity: .72; }
@@ -534,7 +547,10 @@ button:active { transform: translateY(0) scale(0.97); }
 .testimonial-picker button:hover { transform: none; box-shadow: none; background: rgba(248,245,242,.12); }
 .testimonial-picker button.is-active { color: var(--ink); background: var(--pink); }
 @keyframes quote-arrive { from { opacity: .35; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 @media (max-width: 900px) {
+  .services-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .services-section { padding-bottom: 80px; }
   .testimonials-section { padding-block: 68px 76px; }
   .testimonial-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(3, minmax(150px, auto)); gap: 14px; }
   .testimonial-grid::before { inset: -12px; }
@@ -546,6 +562,9 @@ button:active { transform: translateY(0) scale(0.97); }
   .testimonial-card-4 { grid-column: 2; grid-row: 3; }
 }
 @media (max-width: 560px) {
+  .services-list { grid-template-columns: 1fr; gap: 10px; }
+  .service-card { min-height: 0; padding: 18px; }
+  .services-section { padding-bottom: 60px; }
   .testimonials-section { padding: 58px 18px 64px; }
   .testimonials-header { margin-bottom: 28px; }
   .testimonials-subtitle { font-size: .8rem; }

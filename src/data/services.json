@@ -1,9 +1,8 @@
 [
-  "Product Design",
-  "UI/UX Design",
-  "Web Design",
-  "Mobile App Design",
-  "Responsive Design",
-  "Design Systems"
-
+  { "name": "Product Design", "description": "from research and flows to polished, shippable interfaces." },
+  { "name": "UI/UX Design", "description": "clear, usable screens backed by user research." },
+  { "name": "Web Design", "description": "responsive marketing sites and web apps." },
+  { "name": "Mobile App Design", "description": "intuitive iOS and Android app experiences." },
+  { "name": "Responsive Design", "description": "layouts that work from phone to desktop." },
+  { "name": "Design Systems", "description": "reusable components and guidelines that keep products consistent." }
 ]
