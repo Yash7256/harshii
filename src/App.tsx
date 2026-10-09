@@ -38,12 +38,9 @@ function navigateWork() {
 function Header() {
   const headerRef = useRef<HTMLElement>(null)
   useClientLayoutEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      gsap.set(headerRef.current, { autoAlpha: 1, y: 0 })
-      return
-    }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const context = gsap.context(() => {
-      gsap.fromTo(headerRef.current, { autoAlpha: 0, y: -10 }, { autoAlpha: 1, y: 0, duration: .65, ease: 'power2.out' })
+      gsap.fromTo(headerRef.current, { y: -10 }, { y: 0, duration: .65, ease: 'power2.out' })
     }, headerRef)
     return () => context.revert()
   }, [])
@@ -56,12 +53,9 @@ function Header() {
 function Footer() {
   const footerRef = useRef<HTMLElement>(null)
   useClientLayoutEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      gsap.set(footerRef.current, { autoAlpha: 1, y: 0 })
-      return
-    }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const context = gsap.context(() => {
-      gsap.fromTo(footerRef.current, { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: .65, ease: 'power2.out', scrollTrigger: { trigger: footerRef.current, start: 'top 92%', once: true } })
+      gsap.fromTo(footerRef.current, { y: 14 }, { y: 0, duration: .65, ease: 'power2.out', scrollTrigger: { trigger: footerRef.current, start: 'top 92%', once: true } })
     }, footerRef)
     return () => context.revert()
   }, [])
@@ -363,19 +357,17 @@ function Home() {
   useClientLayoutEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const context = gsap.context(() => {
-        gsap.set('.home-intro > div, .name-letter, .home-about > div', { autoAlpha: 1, y: 0 })
-        gsap.set('.avatar', { autoAlpha: 1, scale: 1, y: 0 })
-        gsap.set('.home-about figure', { autoAlpha: 1, scale: 1, y: 0 })
+        gsap.set('.home-intro > div, .name-letter, .avatar, .home-about > div, .home-about figure', { clearProps: 'transform' })
       }, homeRef)
       return () => context.revert()
     }
     const context = gsap.context(() => {
-      gsap.fromTo('.home-intro > div', { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: .8, ease: 'power2.out', delay: .12 })
-      gsap.fromTo('.avatar', { autoAlpha: 0, scale: .92 }, { autoAlpha: 1, scale: 1, duration: .85, ease: 'power2.out', delay: .24 })
-      gsap.fromTo('.name-letter', { autoAlpha: 0, y: 28 }, { autoAlpha: 1, y: 0, duration: .55, stagger: .055, ease: 'power3.out', delay: .36 })
+      gsap.fromTo('.home-intro > div', { y: 8 }, { y: 0, duration: .8, ease: 'power2.out', delay: .12 })
+      gsap.fromTo('.avatar', { y: 8 }, { y: 0, duration: .85, ease: 'power2.out', delay: .24 })
+      gsap.fromTo('.name-letter', { y: 14 }, { y: 0, duration: .55, stagger: .055, ease: 'power3.out', delay: .36 })
       gsap.to('.avatar', { y: -6, duration: 2.8, ease: 'sine.inOut', repeat: -1, yoyo: true, delay: 1.1 })
-      gsap.fromTo('.home-about figure', { autoAlpha: 0, scale: .96, y: 18 }, { autoAlpha: 1, scale: 1, y: 0, duration: .8, ease: 'power2.out', scrollTrigger: { trigger: '.home-about', start: 'top 82%', once: true } })
-      gsap.fromTo('.home-about > div', { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: .7, ease: 'power2.out', delay: .12, scrollTrigger: { trigger: '.home-about', start: 'top 82%', once: true } })
+      gsap.fromTo('.home-about figure', { y: 12 }, { y: 0, duration: .8, ease: 'power2.out', scrollTrigger: { trigger: '.home-about', start: 'top 82%', once: true } })
+      gsap.fromTo('.home-about > div', { y: 12 }, { y: 0, duration: .7, ease: 'power2.out', delay: .12, scrollTrigger: { trigger: '.home-about', start: 'top 82%', once: true } })
     }, homeRef)
     return () => context.revert()
   }, [])
@@ -503,14 +495,12 @@ function App({ initialPath }: { initialPath?: string } = {}) {
     return '/'
   }
   const [path, setPath] = useState<Route>(() => resolvePath(initialPath ?? (typeof window === 'undefined' ? '/' : window.location.pathname)))
-  const contentRef = useRef<HTMLElement>(null)
   useEffect(() => { const handler = () => setPath(resolvePath(window.location.pathname)); window.addEventListener('popstate', handler); return () => window.removeEventListener('popstate', handler) }, [])
   useClientLayoutEffect(() => {
-    gsap.fromTo(contentRef.current, { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: .45, ease: 'power2.out', clearProps: 'transform' })
     window.scrollTo({ top: 0 })
   }, [path])
   const content = path === '/contact' ? <Contact /> : <Home />
-  return <main className="container"><Header /><section className="page-content" ref={contentRef}>{content}</section><Footer /></main>
+  return <main className="container"><Header /><section className="page-content">{content}</section><Footer /></main>
 }
 
 export default App
