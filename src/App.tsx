@@ -79,11 +79,14 @@ interface StackProject {
   title: string
   category: string
   desc: string
+  alt: string
   tags: string[]
   behance: string
   bgGradient: string
   bgImage: string
   bgImageMobile?: string
+  imageWidth: number
+  imageHeight: number
 }
 
 const stackProjects: StackProject[] = projectsData
@@ -268,13 +271,6 @@ function ProjectStack() {
     const applyBackgrounds = () => {
       const bg = stackRef.current?.querySelector<HTMLElement>('.stack-bg')
       if (bg) bg.style.backgroundImage = "linear-gradient(rgba(248,245,242,.62), rgba(248,245,242,.62)), url('/gingham.webp')"
-      stackRef.current?.querySelectorAll<HTMLElement>('.stack-card').forEach((card, i) => {
-        const proj = stackProjects[i]
-        if (!proj) return
-        const mobileImg = window.innerWidth < 650 ? proj.bgImageMobile : undefined
-        card.style.setProperty('--card-scrim', proj.bgGradient)
-        card.style.backgroundImage = `url(${mobileImg ?? proj.bgImage})`
-      })
     }
     const target = stackRef.current
     if (!target) return
@@ -318,10 +314,22 @@ function ProjectStack() {
           <article
             className={`stack-card stack-card-${i} ${activeIdx === i ? 'active-card' : 'inactive-side-card'}`}
             key={proj.id}
+            style={{ '--card-scrim': proj.bgGradient } as React.CSSProperties}
             onClick={() => {
               if (activeIdx !== i) scrollToProject(i)
             }}
           >
+            <picture className="stack-card-visual">
+              {proj.bgImageMobile && <source media="(max-width: 768px)" srcSet={proj.bgImageMobile} />}
+              <img
+                src={proj.bgImage}
+                alt={proj.alt}
+                width={proj.imageWidth}
+                height={proj.imageHeight}
+                decoding="async"
+                loading="lazy"
+              />
+            </picture>
             <div className="stack-card-top">
               <span className="stack-card-tag">{proj.category}</span>
               <span className="stack-card-num">{proj.num} / {String(stackProjects.length).padStart(2, '0')}</span>
