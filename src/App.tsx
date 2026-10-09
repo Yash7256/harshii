@@ -498,7 +498,8 @@ function Contact() {
 
 function App({ initialPath }: { initialPath?: string } = {}) {
   const resolvePath = (raw: string): Route => {
-    if (raw === '/contact') return '/contact'
+    const pathname = raw.replace(/\/+$/, '') || '/'
+    if (pathname === '/contact') return '/contact'
     return '/'
   }
   const [path, setPath] = useState<Route>(() => resolvePath(initialPath ?? (typeof window === 'undefined' ? '/' : window.location.pathname)))
