@@ -9,8 +9,8 @@ const outputDir = resolve(root, 'dist')
 const routes = [
   {
     path: '/',
-    title: 'Harshita Upadhyay — Product Designer in India',
-    description: 'Product designer in India creating thoughtful digital experiences across UI/UX, product design, and design systems. Explore selected work and get in touch.',
+    title: 'Harshita Upadhyay | Product & UI/UX Designer, India',
+    description: 'Harshita Upadhyay is a product and UI/UX designer in India crafting SaaS dashboards, mobile apps and design systems. View case studies and get in touch.',
     robots: 'index,follow',
   },
   {
