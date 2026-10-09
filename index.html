@@ -50,11 +50,15 @@
         "@graph": [
           {
             "@type": "Person",
+            "@id": "https://www.harshitaupadhyay.site/#person",
             "name": "Harshita Upadhyay",
+            "alternateName": ["Harshita"],
             "jobTitle": "Product Designer",
             "description": "Product designer in India creating thoughtful digital experiences across UI/UX, product design, and design systems. Explore selected work and get in touch.",
             "url": "https://www.harshitaupadhyay.site/",
             "image": "https://www.harshitaupadhyay.site/avatar.png",
+            "mainEntityOfPage": { "@id": "https://www.harshitaupadhyay.site/#profile" },
+            "knowsAbout": ["Product Design", "UI/UX Design", "Design Systems", "UX Research", "Prototyping"],
             "sameAs": [
               "https://www.linkedin.com/in/harshita-upadhyay-288682414",
               "https://www.behance.net/harshitaupadhyay",
@@ -63,8 +67,18 @@
           },
           {
             "@type": "WebSite",
+            "@id": "https://www.harshitaupadhyay.site/#website",
             "name": "Harshita Upadhyay — Product Designer",
-            "url": "https://www.harshitaupadhyay.site/"
+            "url": "https://www.harshitaupadhyay.site/",
+            "inLanguage": "en",
+            "publisher": { "@id": "https://www.harshitaupadhyay.site/#person" },
+            "author": { "@id": "https://www.harshitaupadhyay.site/#person" }
+          },
+          {
+            "@type": "ProfilePage",
+            "@id": "https://www.harshitaupadhyay.site/#profile",
+            "url": "https://www.harshitaupadhyay.site/",
+            "mainEntity": { "@id": "https://www.harshitaupadhyay.site/#person" }
           }
         ]
       }
