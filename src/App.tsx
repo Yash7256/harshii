@@ -381,7 +381,7 @@ function Home() {
   }, [])
   return <>
     <section ref={homeRef} className="home-page">
-      <section className="home-intro"><div><h1>Harshita Upadhyay<br />Product Designer</h1><p>Designing gentle moments in a digital world. दिल से.</p></div><img className="avatar" src="/avatar.webp" width="190" height="190" decoding="async" alt="Illustrated portrait of Harshita Upadhyay" /></section>
+      <section className="home-intro"><div><h1>Harshita Upadhyay<br />Product Designer</h1><p>Designing gentle moments in a digital world. दिल से.</p></div><img className="avatar" src="/avatar.webp" width="190" height="190" decoding="async" loading="eager" fetchPriority="high" alt="Illustrated portrait of Harshita Upadhyay" /></section>
       <div className="name-display" aria-hidden="true">{'Harshita'.split('').map((letter, index) => <span className="name-letter" key={`${letter}-${index}`}>{letter}</span>)}</div>
       <Texture className="home-about"><figure><img src={assets.desk} width="982" height="949" loading="lazy" decoding="async" alt="A cosy illustrated designer workspace" /></figure><div><p>Hi, I’m <strong>Harshita Upadhyay</strong>, a product designer who loves creating gentle, thoughtful digital experiences. I care deeply about aesthetics, clarity, and the small details that make designs feel calm, human, and meaningful.</p><p>~I design with intention.</p><div className="button-row"><a href="/#selected-work" onClick={(e) => { e.preventDefault(); navigateWork() }}>See works</a><a href="/contact">Resume</a></div></div></Texture>
       <section className="home-promise"><h2>I MAKE DESIGNS<br />PEOPLE REMEMBER</h2><p>I design clean websites, apps and brand systems that help ideas look sharper, feel trusted and work with purpose</p></section>
@@ -447,7 +447,7 @@ function TestimonialsSection() {
           aria-atomic="true"
         >
           <div className="feature-orbit" aria-hidden="true" />
-          <img className="feature-avatar" src={`/testimonial${activeIdx + 1}.jpg`} alt={`${active.person}`} width="56" height="56" />
+          <img className="feature-avatar" src={`/testimonial${activeIdx + 1}.webp`} alt={`${active.person}`} width="56" height="56" decoding="async" loading="lazy" />
           <blockquote key={active.id}>“{active.quote}”</blockquote>
           <div className="feature-person"><strong>{active.person}</strong><span>{active.role}</span></div>
         </article>
@@ -456,7 +456,7 @@ function TestimonialsSection() {
             <span className="testimonial-card-mark" aria-hidden="true">“</span>
             <blockquote>{t.quote}</blockquote>
             <div className="testimonial-person">
-              <img className="testimonial-avatar" src={`/testimonial${index + 1}.jpg`} alt={`${t.person}`} width="39" height="39" />
+              <img className="testimonial-avatar" src={`/testimonial${index + 1}.webp`} alt={`${t.person}`} width="39" height="39" decoding="async" loading="lazy" />
               <span className="testimonial-person-copy"><strong>{t.person}</strong><small>{t.role}</small></span>
             </div>
           </article>
