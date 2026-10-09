@@ -17,6 +17,12 @@ The production build prerenders the homepage and contact page into static HTML s
 
 The homepage is indexable. The contact form uses `noindex,follow` and is intentionally omitted from `public/sitemap.xml`. Keep the sitemap and `public/robots.txt` aligned when adding indexable routes.
 
+## Content SEO
+
+Edit each route’s title and description in `scripts/prerender.mjs`. The services list and its short descriptions live in `src/data/services.json`; add entries there to update both the homepage cards and contact form options. Project titles, summaries, images, alt text, and Behance links live in `src/data/projects.json`; optional role, tools, timeline, and outcome fields render when verified values are added. Target phrases include “Harshita Upadhyay”, “product designer India”, “UI/UX designer portfolio”, “design system designer”, and “SaaS dashboard UI design”.
+
+Owner details still needed before adding further claims: city, education, certifications, internship details, a public resume PDF, public email, and verified role, tools, timeline, and outcome for each project. Replace the Sedative Physio Behance profile URL with its project URL when available. Related `TODO(owner)` comments are kept in `src/App.tsx`.
+
 ## Deploy
 
 Vercel runs `npm run build` and serves the `dist` directory. `vercel.json` configures the canonical `www` host, contact route, cache policy, and security headers. Verify production routes, metadata, sitemap, and Search Console indexing after deployment.
