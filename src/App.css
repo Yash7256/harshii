@@ -507,6 +507,7 @@ button:active { transform: translateY(0) scale(0.97); }
 .testimonial-card:hover, .testimonial-card.is-selected { transform: none; opacity: .52; border-color: rgba(101,86,79,.12); box-shadow: none; }
 .testimonial-card-mark { position: absolute; right: 16px; top: 9px; color: rgba(184,135,139,.48); font: 3.6rem/.9 Georgia,serif; opacity: .52; }
 .testimonial-card blockquote { position: relative; margin: 18px 0 20px; font-size: .79rem; font-style: italic; line-height: 1.55; }
+.testimonial-quote { display: flex; flex: 1; flex-direction: column; justify-content: space-between; margin: 0; }
 .testimonial-person { display: flex; align-items: center; gap: 11px; }
 .testimonial-avatar, .feature-avatar { display: block; flex: 0 0 auto; object-fit: cover; border-radius: 50%; border: 2px solid var(--pink); }
 .testimonial-avatar { width: 39px; height: 39px; filter: saturate(.45); opacity: .58; border-color: rgba(184,135,139,.42); }

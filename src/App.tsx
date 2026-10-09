@@ -449,17 +449,16 @@ function TestimonialsSection() {
         >
           <div className="feature-orbit" aria-hidden="true" />
           <img className="feature-avatar" src={`/testimonial${activeIdx + 1}.webp`} alt={`${active.person}`} width="56" height="56" decoding="async" loading="lazy" />
-          <blockquote key={active.id}>“{active.quote}”</blockquote>
-          <div className="feature-person"><strong>{active.person}</strong><span>{active.role}</span></div>
+          <figure className="feature-quote"><blockquote key={active.id}>“{active.quote}”</blockquote><figcaption className="feature-person"><strong>{active.person}</strong><span>{active.role}</span></figcaption></figure>
         </article>
         {testimonialsData.map((t, index) => (
           <article className={`testimonial-card testimonial-card-${index + 1}${index === activeIdx ? ' is-selected' : ''}`} key={t.id}>
             <span className="testimonial-card-mark" aria-hidden="true">“</span>
-            <blockquote>{t.quote}</blockquote>
-            <div className="testimonial-person">
+            <figure className="testimonial-quote">{index !== activeIdx && <blockquote>{t.quote}</blockquote>}
+            <figcaption className="testimonial-person">
               <img className="testimonial-avatar" src={`/testimonial${index + 1}.webp`} alt={`${t.person}`} width="39" height="39" decoding="async" loading="lazy" />
               <span className="testimonial-person-copy"><strong>{t.person}</strong><small>{t.role}</small></span>
-            </div>
+            </figcaption></figure>
           </article>
         ))}
       </div>
@@ -467,6 +466,7 @@ function TestimonialsSection() {
   )
 }
 
+// TODO(owner): Add a verified public email to socials.json before rendering a direct email link.
 function Contact() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
   const submit = async (event: FormEvent<HTMLFormElement>) => {
