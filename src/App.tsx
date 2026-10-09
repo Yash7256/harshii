@@ -80,6 +80,10 @@ interface StackProject {
   category: string
   desc: string
   alt: string
+  role?: string
+  tools?: string[]
+  timeline?: string
+  outcome?: string
   tags: string[]
   behance: string
   bgGradient: string
@@ -91,6 +95,7 @@ interface StackProject {
 
 const stackProjects: StackProject[] = projectsData
 // TODO(owner): Replace the Sedative Physio Behance profile URL in projects.json with its case-study URL.
+// TODO(owner): Add verified role, tools, timeline, and outcome details for CyberSec Toolkit and Sedative Physio.
 
 function ProjectStack() {
   const stackRef = useRef<HTMLElement>(null)
@@ -338,6 +343,8 @@ function ProjectStack() {
             <div className="stack-card-body">
               <h3>{proj.title}</h3>
               <p>{proj.desc}</p>
+              {(proj.role || proj.tools?.length || proj.timeline) && <p className="stack-card-meta">{[proj.role, proj.tools?.join(', '), proj.timeline].filter(Boolean).join(' · ')}</p>}
+              {proj.outcome && <p className="stack-card-outcome">{proj.outcome}</p>}
               <div className="stack-card-pills">
                 {proj.tags.map((pill) => (
                   <span className="stack-pill-tag" key={pill}>
@@ -347,11 +354,8 @@ function ProjectStack() {
               </div>
             </div>
             <div className="stack-card-footer">
-              <span className="stack-card-hint">
-                {activeIdx !== i ? 'Click card to focus' : i < stackProjects.length - 1 ? 'Scroll for next project' : 'Final selected project'}
-              </span>
               <a className="stack-card-btn" href={proj.behance} target="_blank" rel="noopener noreferrer" onClick={(event) => event.stopPropagation()}>
-                View on Behance <span aria-hidden="true">→</span>
+                View {proj.title} case study on Behance <span aria-hidden="true">→</span>
               </a>
             </div>
           </article>
