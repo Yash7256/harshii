@@ -90,6 +90,7 @@ interface StackProject {
 }
 
 const stackProjects: StackProject[] = projectsData
+// TODO(owner): Replace the Sedative Physio Behance profile URL in projects.json with its case-study URL.
 
 function ProjectStack() {
   const stackRef = useRef<HTMLElement>(null)
@@ -383,7 +384,7 @@ function Home() {
     <section ref={homeRef} className="home-page">
       <section className="home-intro"><div><h1>Harshita Upadhyay<br />Product Designer</h1><p>Designing gentle moments in a digital world. <span lang="hi">दिल से</span>.</p></div><img className="avatar" src="/avatar.webp" width="190" height="190" decoding="async" loading="eager" fetchPriority="high" alt="Illustrated portrait of Harshita Upadhyay" /></section>
       <div className="name-display" aria-hidden="true">{'Harshita'.split('').map((letter, index) => <span className="name-letter" key={`${letter}-${index}`}>{letter}</span>)}</div>
-      <Texture className="home-about"><figure><img src={assets.desk} width="982" height="949" loading="lazy" decoding="async" alt="A cosy illustrated designer workspace" /></figure><div><p>Hi, I’m <strong>Harshita Upadhyay</strong>, a product designer who loves creating gentle, thoughtful digital experiences. I care deeply about aesthetics, clarity, and the small details that make designs feel calm, human, and meaningful.</p><p>~I design with intention.</p><div className="button-row"><a href="/#selected-work" onClick={(e) => { e.preventDefault(); navigateWork() }}>See works</a><a href="/contact">Resume</a></div></div></Texture>
+      <Texture className="home-about"><figure><img src={assets.desk} width="982" height="949" loading="lazy" decoding="async" alt="A cosy illustrated designer workspace" /></figure><div><p>Hi, I’m <strong>Harshita Upadhyay</strong>, a product designer who loves creating gentle, thoughtful digital experiences. I care deeply about aesthetics, clarity, and the small details that make designs feel calm, human, and meaningful.</p><p>~I design with intention.</p><div className="button-row"><a href="/#selected-work" onClick={(e) => { e.preventDefault(); navigateWork() }}>See works</a>{/* TODO(owner): Link to a supplied resume PDF when one is available. */}<a href="/contact">Resume</a></div></div></Texture>
       <section className="home-promise"><h2>I MAKE DESIGNS<br />PEOPLE REMEMBER</h2><p>I design clean websites, apps and brand systems that help ideas look sharper, feel trusted and work with purpose</p></section>
     </section>
     <ProjectStack />
