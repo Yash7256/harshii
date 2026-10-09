@@ -9,6 +9,7 @@ import socialsData from './data/socials.json'
 import './App.css'
 
 gsap.registerPlugin(ScrollTrigger)
+const useClientLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect
 
 const assets = {
   gingham: '/gingham.webp',
@@ -36,7 +37,7 @@ function navigateWork() {
 
 function Header() {
   const headerRef = useRef<HTMLElement>(null)
-  useLayoutEffect(() => {
+  useClientLayoutEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       gsap.set(headerRef.current, { autoAlpha: 1, y: 0 })
       return
@@ -54,7 +55,7 @@ function Header() {
 
 function Footer() {
   const footerRef = useRef<HTMLElement>(null)
-  useLayoutEffect(() => {
+  useClientLayoutEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       gsap.set(footerRef.current, { autoAlpha: 1, y: 0 })
       return
@@ -108,7 +109,7 @@ function ProjectStack() {
     window.scrollTo({ top: scrollPos, behavior: 'smooth' })
   }, [])
 
-  useLayoutEffect(() => {
+  useClientLayoutEffect(() => {
     const context = gsap.context(() => {
       const cards = gsap.utils.toArray<HTMLElement>('.stack-card')
       const n = cards.length
@@ -269,7 +270,7 @@ function ProjectStack() {
     }
   }, [])
 
-  useLayoutEffect(() => {
+  useClientLayoutEffect(() => {
     const applyBackgrounds = () => {
       const bg = stackRef.current?.querySelector<HTMLElement>('.stack-bg')
       if (bg) bg.style.backgroundImage = "linear-gradient(rgba(248,245,242,.62), rgba(248,245,242,.62)), url('/gingham.webp')"
@@ -359,7 +360,7 @@ function ProjectStack() {
 
 function Home() {
   const homeRef = useRef<HTMLElement>(null)
-  useLayoutEffect(() => {
+  useClientLayoutEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const context = gsap.context(() => {
         gsap.set('.home-intro > div, .name-letter, .home-about > div', { autoAlpha: 1, y: 0 })
@@ -380,7 +381,7 @@ function Home() {
   }, [])
   return <>
     <section ref={homeRef} className="home-page">
-      <section className="home-intro"><div><h1>Designing gentle moments in a<br /> digital world.</h1><p>दिल से.</p></div><img className="avatar" src="/avatar.webp" width="190" height="190" decoding="async" alt="Illustrated portrait of Harshita Upadhyay" /></section>
+      <section className="home-intro"><div><h1>Harshita Upadhyay<br />Product Designer</h1><p>Designing gentle moments in a digital world. दिल से.</p></div><img className="avatar" src="/avatar.webp" width="190" height="190" decoding="async" alt="Illustrated portrait of Harshita Upadhyay" /></section>
       <h2 className="name-display" aria-label="Harshita">{'Harshita'.split('').map((letter, index) => <span className="name-letter" aria-hidden="true" key={`${letter}-${index}`}>{letter}</span>)}</h2>
       <Texture className="home-about"><figure><img src={assets.desk} width="982" height="949" loading="lazy" decoding="async" alt="A cosy illustrated designer workspace" /></figure><div><p>Hi, I’m <strong>Harshita Upadhyay</strong>, a product designer who loves creating gentle, thoughtful digital experiences. I care deeply about aesthetics, clarity, and the small details that make designs feel calm, human, and meaningful.</p><p>~I design with intention.</p><div className="button-row"><a href="/#selected-work" onClick={(e) => { e.preventDefault(); navigateWork() }}>See works</a><a href="/contact">Resume</a></div></div></Texture>
       <section className="home-promise"><h2>I MAKE DESIGNS<br />PEOPLE REMEMBER</h2><p>I design clean websites, apps and brand systems that help ideas look sharper, feel trusted and work with purpose</p></section>
@@ -495,15 +496,15 @@ function Contact() {
   </form></Texture></>
 }
 
-function App() {
+function App({ initialPath }: { initialPath?: string } = {}) {
   const resolvePath = (raw: string): Route => {
     if (raw === '/contact') return '/contact'
     return '/'
   }
-  const [path, setPath] = useState<Route>(() => resolvePath(window.location.pathname))
+  const [path, setPath] = useState<Route>(() => resolvePath(initialPath ?? (typeof window === 'undefined' ? '/' : window.location.pathname)))
   const contentRef = useRef<HTMLElement>(null)
   useEffect(() => { const handler = () => setPath(resolvePath(window.location.pathname)); window.addEventListener('popstate', handler); return () => window.removeEventListener('popstate', handler) }, [])
-  useLayoutEffect(() => {
+  useClientLayoutEffect(() => {
     gsap.fromTo(contentRef.current, { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: .45, ease: 'power2.out', clearProps: 'transform' })
     window.scrollTo({ top: 0 })
   }, [path])
